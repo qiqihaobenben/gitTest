@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery的例子展示</title>
+	<style>
+  h3 { margin: 0; }
+  div,span,p {
+    width: 80px;
+    height: 40px;
+    float:left;
+    padding: 10px;
+    margin: 10px;
+    background-color: #EEEEEE;
+  }
+  </style>
+	<script src="jquery-3.2.1.js"></script>
+</head>
+<body>
+<ul>
+  <li><strong>list</strong> item 1 -
+    one strong tag</li>
+  <li><strong>list</strong> item <strong>2</strong> -
+    two <span>strong tags</span></li>
+  <li>list item 3</li>
+  <li>list item 4</li>
+  <li>list item 5</li>
+  <li>list item 6</li>
+</ul>
+	<script>
+		$('ul').on('click',function (event){
+			if($(event.target).is('li')){
+				alert(1)
+			}
+		})
+	</script>
+</body>
+</html>
