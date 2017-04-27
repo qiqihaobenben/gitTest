@@ -4,34 +4,78 @@
 	<meta charset="UTF-8">
 	<title>jQuery的例子展示</title>
 	<style>
-  h3 { margin: 0; }
-  div,span,p {
-    width: 80px;
-    height: 40px;
-    float:left;
-    padding: 10px;
-    margin: 10px;
-    background-color: #EEEEEE;
-  }
+	  div {
+	  margin:3px; width:50px; position:absolute;
+	  height:50px; left:10px; top:30px;
+	  background-color:yellow;
+	}
+div.red { background-color:red; }  </style>
   </style>
 	<script src="jquery-3.2.1.js"></script>
 </head>
 <body>
-<ul>
-  <li><strong>list</strong> item 1 -
-    one strong tag</li>
-  <li><strong>list</strong> item <strong>2</strong> -
-    two <span>strong tags</span></li>
-  <li>list item 3</li>
-  <li>list item 4</li>
-  <li>list item 5</li>
-  <li>list item 6</li>
-</ul>
+<span></span>
+<button>Start</button><button >Stop</button>  <div></div>
 	<script>
-		$('ul').on('click',function (event){
-			if($(event.target).is('li')){
-				alert(1)
-			}
+	
+		$('button:first').click(function(){
+			var $div = $('div');
+			$div.animate({left: '+=200'},2000);
+			$div.animate({top: '10px'},{duration: 400, always: function(){
+				$.fx.off = true;
+			}});
+			$div.queue(function (){
+				$(this).toggleClass('red');
+
+				$(this).dequeue();
+			})
+			$div.animate({left:'10px', top:'30px'}, 700);
+			$div.slideUp({
+				duration: 400,
+				queue: true, 
+				complete: function (){
+					console.log('complete');
+				},
+				done: function (){
+					console.log('done');
+				},
+				fail: function (){
+					console.log('fail');
+				},
+				always: function (){
+					console.log('always');
+				}
+			})
+			$div.fadeIn({
+				duration: 400,
+				queue: true, 
+				complete: function (){
+					console.log('complete');
+				},
+				done: function (){
+					console.log('done');
+				},
+				fail: function (){
+					console.log('fail');
+				},
+				always: function (){
+					console.log('always');
+				}
+			})
+		})
+		function showIt() {
+			var $div = $('div');
+		  var n = $div.queue("fx");
+		  $("span").text( n.length ,n);
+		  setTimeout(showIt, 100);
+		}
+		showIt();
+
+		$('button').filter(':last').click(function (event){
+			console.log(event);
+			console.log($(event.target));
+			var $div = $('div');
+			$div.finish();
 		})
 	</script>
 </body>
